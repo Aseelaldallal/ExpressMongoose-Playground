@@ -1,16 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const childrenSchema = require('./children');
+const ChildrenSchema = require('./children');
 
-const parentSchema = new Schema({
+const ParentSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Please enter a name for the parent']
+    required: [true, 'Please enter a name']
   },
-  description: String,
+  description: {
+    type: String
+  },
+
   strictnessLevel: Number,
   children: [ChildrenSchema],
-  friends: [
+  posts: [
     {
       type: Schema.Types.ObjectId,
       ref: 'post'
@@ -18,4 +21,6 @@ const parentSchema = new Schema({
   ]
 });
 
-module.exports = new mongoose.model('parent', ParentSchema);
+const Parent = mongoose.model('parent', ParentSchema);
+
+module.exports = Parent;

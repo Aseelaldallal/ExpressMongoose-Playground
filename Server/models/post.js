@@ -1,5 +1,5 @@
-const friedChicken = require('mongoose');
-const Schema = friedChicken.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
   parent: {
@@ -10,4 +10,4 @@ const PostSchema = new Schema({
   content: String
 });
 
-module.exports = friedChicken.model('post', PostSchema);
+module.exports = mongoose.model('post', PostSchema);

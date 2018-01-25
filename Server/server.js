@@ -33,6 +33,16 @@ app.post('/parent', (req, res) => {
     });
 });
 
+app.get('/parent/:id', (req, res) => {
+  Parent.findById({ _id: req.params.id })
+    .then(found => {
+      res.send(found);
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
+});
+
 app.get('/parent', (req, res) => {
   Parent.find({})
     .then(parents => {
@@ -41,6 +51,16 @@ app.get('/parent', (req, res) => {
     .catch(err => {
       res.status(400).send(err);
     });
+});
+
+app.patch('/parent/:id/', (req, res) => {
+  Parent.findByIdAndUpdate(
+    req.params.id,
+    { $set: req.body },
+    { new: true }
+  ).then(updatedParent => {
+    console.log('UPDATED: ', updatedParent);
+  });
 });
 
 app.listen(PORT, () => {
